@@ -1,6 +1,4 @@
 terraform {
-  required_version = "~> 1.5.1"
-
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
@@ -35,24 +33,22 @@ terraform {
 
 provider "digitalocean" {
   token             = var.do_token
-  spaces_access_id  = var.spaces_access_key_id
-  spaces_secret_key = var.spaces_secret_access_key
 }
 
-provider "sendgrid" {
-  api_key = var.sendgrid_api
+provider "aws" {
+  region = var.aws_region
 }
+
+# provider "sendgrid" {
+#   api_key = var.sendgrid_api
+# }
 
 ############
 # Choose between local or cloud state storage
 ############
 
 # IMP. If using local state file management make sure you DO NOT upload your state file in version control as this stores sensitive data
-terraform {
-  backend "local" {
-    path = "./terraform.tfstate"
-  }
-}
+
 
 # # If you decide to store your state file within Terraform Cloud
 # # - Comment the local backend block above

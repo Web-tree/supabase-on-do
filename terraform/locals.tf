@@ -102,7 +102,7 @@ locals {
     "TXT"   = 3600
   }
 
-  ssh_fingerprints = var.ssh_keys != [""] ? var.ssh_keys : [digitalocean_ssh_key.this[0].fingerprint]
+  ssh_fingerprints = var.ssh_keys != [] ? var.ssh_keys : [digitalocean_ssh_key.this[0].fingerprint]
 
   smtp_sender_name   = var.smtp_sender_name != "" ? var.smtp_sender_name : var.smtp_admin_user
   smtp_nickname      = var.smtp_nickname != "" ? var.smtp_nickname : var.smtp_sender_name != "" ? var.smtp_sender_name : var.smtp_admin_user
@@ -118,15 +118,15 @@ locals {
       TF_DOMAIN                   = "${var.domain}",
       TF_SITE_URL                 = "${var.site_url}",
       TF_TIMEZONE                 = "${var.timezone}",
-      TF_REGION                   = "${var.region}",
-      TF_SPACES_BUCKET            = "${digitalocean_spaces_bucket.this.name}",
+      TF_REGION                   = "${var.aws_region}",
+      TF_SPACES_BUCKET            = "${var.storage_bucket_name}",
       TF_SPACES_ACCESS_KEY_ID     = "${var.spaces_access_key_id}",
       TF_SPACES_SECRET_ACCESS_KEY = "${var.spaces_secret_access_key}",
       TF_SMTP_ADMIN_EMAIL         = "${var.smtp_admin_user}",
       TF_SMTP_HOST                = "${var.smtp_host}",
       TF_SMTP_PORT                = "${var.smtp_port}",
       TF_SMTP_USER                = "${var.smtp_user}",
-      TF_SMTP_PASS                = "${sendgrid_api_key.this.api_key}",
+      TF_SMTP_PASS                = var.smtp_password
       TF_SMTP_SENDER_NAME         = "${local.smtp_sender_name}",
       TF_DEFAULT_ORGANIZATION     = "${var.studio_org}",
       TF_DEFAULT_PROJECT          = "${var.studio_project}",

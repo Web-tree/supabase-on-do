@@ -20,14 +20,27 @@ variable "spaces_secret_access_key" {
   description = "Secret access key used for Spaces API operations."
   type        = string
   sensitive   = true
+ }
+
+variable "storage_bucket_name" {
+  description = "Name of the S3 bucket used for storage."
+  type        = string
 }
 
 # You can also set SENDGRID_API_KEY env variable
 # Set the variable value in *.tfvars file or use the -var="sendgrid_api=..." CLI option
-variable "sendgrid_api" {
-  description = "SendGrid API Key."
+# variable "sendgrid_api" {
+#   description = "SendGrid API Key."
+#   type        = string
+#   sensitive   = true
+#   default = ""
+# }
+
+variable "smtp_password" {
+  description = "SMTP Password."
   type        = string
   sensitive   = true
+  default = ""
 }
 
 # # You can also set TF_TOKEN_app_terraform_io
@@ -38,8 +51,13 @@ variable "sendgrid_api" {
 #   sensitive   = true
 # }
 
-variable "region" {
+variable "do_region" {
   description = "The region where the Droplet will be created."
+  type        = string
+}
+
+variable "aws_region" {
+  description = "The region where the S3 bucket will be created."
   type        = string
 }
 
@@ -111,7 +129,9 @@ variable "ssh_pub_file" {
 variable "ssh_keys" {
   description = "A list of SSH key IDs or fingerprints to enable in the format [12345, 123456]. Only one of `var.ssh_keys` or `var.ssh_pub_file` needs to be specified and should be used."
   type        = list(string)
-  default     = []
+  default     = [
+    "ca:22:f3:05:59:f6:c2:30:e9:0e:de:b8:21:b1:3d:a6"
+  ]
 }
 
 variable "tags" {

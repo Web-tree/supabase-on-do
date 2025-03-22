@@ -1,17 +1,5 @@
-resource "random_id" "bucket" {
-  byte_length = 8
-  prefix      = "supabase-"
-}
-
-
-resource "digitalocean_spaces_bucket" "this" {
-  name   = random_id.bucket.hex
-  region = var.region
-}
-
-resource "digitalocean_spaces_bucket_policy" "this" {
-  region = digitalocean_spaces_bucket.this.region
-  bucket = digitalocean_spaces_bucket.this.name
+resource "aws_s3_bucket_policy" "this" {
+  bucket = var.storage_bucket_name
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -21,8 +9,8 @@ resource "digitalocean_spaces_bucket_policy" "this" {
         "Principal" : "*",
         "Action" : "s3:*",
         "Resource" : [
-          "arn:aws:s3:::${digitalocean_spaces_bucket.this.name}",
-          "arn:aws:s3:::${digitalocean_spaces_bucket.this.name}/*"
+          "arn:aws:s3:::${var.storage_bucket_name}",
+          "arn:aws:s3:::${var.storage_bucket_name}/*"
         ],
         "Condition" : {
           "NotIpAddress" : {
@@ -35,7 +23,7 @@ resource "digitalocean_spaces_bucket_policy" "this" {
 }
 
 resource "digitalocean_volume" "this" {
-  region                  = var.region
+  region                  = var.do_region
   name                    = "supabase-volume"
   size                    = var.volume_size
   initial_filesystem_type = "ext4"

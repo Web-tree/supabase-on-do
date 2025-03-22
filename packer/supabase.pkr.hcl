@@ -1,5 +1,4 @@
 packer {
-  required_version = "~> 1.9.1"
 
   required_plugins {
     digitalocean = {
@@ -25,7 +24,7 @@ variable "region" {
 variable "droplet_image" {
   description = "The Droplet image ID or slug. This could be either image ID or droplet snapshot ID."
   type        = string
-  default     = "ubuntu-22-10-x64"
+  default     = "ubuntu-24-10-x64"
 }
 
 variable "droplet_size" {

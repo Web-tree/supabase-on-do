@@ -10,11 +10,11 @@ output "htpasswd" {
   sensitive   = true
 }
 
-output "sendgrid_generated_api" {
-  description = "SendGrid API key to allow sending of emails (The api key is limited to Send Mail scope only)."
-  value       = sendgrid_api_key.this.api_key
-  sensitive   = true
-}
+# output "sendgrid_generated_api" {
+#   description = "SendGrid API key to allow sending of emails (The api key is limited to Send Mail scope only)."
+#   value       = sendgrid_api_key.this.api_key
+#   sensitive   = true
+# }
 
 output "jwt" {
   description = "Randomly generated 40 character jwt secret."
@@ -54,7 +54,7 @@ output "reserved_ip" {
   value       = digitalocean_reserved_ip.this.ip_address
 }
 
-output "bucket" {
-  description = "The unique name of the bucket in the format `supabase-ab12cd34ef56gh78`."
-  value       = digitalocean_spaces_bucket.this.name
-}
+# output "bucket" {
+#   description = "The unique name of the bucket in the format `supabase-ab12cd34ef56gh78`."
+#   value       = digitalocean_spaces_bucket.this.name
+# }

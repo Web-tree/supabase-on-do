@@ -1,6 +1,6 @@
-data "digitalocean_domain" "this" {
-  name = var.domain
-}
+# data "digitalocean_domain" "this" {
+#   name = var.domain
+# }
 
 # Wait for the Volume to mount to the Droplet to ensure "Resource Busy" error is not encountered
 resource "time_sleep" "wait_20_seconds" {
@@ -12,7 +12,7 @@ resource "time_sleep" "wait_20_seconds" {
 
 resource "digitalocean_reserved_ip" "this" {
   droplet_id = digitalocean_droplet.this.id
-  region     = var.region
+  region     = var.do_region
 
   depends_on = [
     time_sleep.wait_20_seconds
@@ -22,7 +22,7 @@ resource "digitalocean_reserved_ip" "this" {
 resource "digitalocean_record" "a_record" {
   domain = var.domain
   type   = "A"
-  name   = "supabase"
+  name   = "spb"
   value  = digitalocean_reserved_ip.this.ip_address
 }
 

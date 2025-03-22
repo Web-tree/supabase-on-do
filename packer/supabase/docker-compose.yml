@@ -16,7 +16,7 @@ services:
       - TZ=${TIMEZONE}
       - URL=${DOMAIN}
       - VALIDATION=dns
-      - SUBDOMAINS=supabase
+      - SUBDOMAINS=spb
       - DNSPLUGIN=digitalocean
       - ONLY_SUBDOMAINS=true
     volumes:
@@ -197,7 +197,6 @@ services:
       IMGPROXY_URL: http://imgproxy:5001
       AWS_ACCESS_KEY_ID: ${SPACES_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${SPACES_SECRET_ACCESS_KEY}
-      GLOBAL_S3_ENDPOINT: ${SPACES_ENDPOINT}
 
   imgproxy:
     container_name: supabase-imgproxy

@@ -1,6 +1,6 @@
 data "digitalocean_droplet_snapshot" "supabase" {
   name_regex  = "^supabase-20\\d{12}$"
-  region      = var.region
+  region      = var.do_region
   most_recent = true
 }
 
@@ -32,7 +32,7 @@ data "cloudinit_config" "this" {
 resource "digitalocean_droplet" "this" {
   image      = data.digitalocean_droplet_snapshot.supabase.id
   name       = "supabase-droplet"
-  region     = var.region
+  region     = var.do_region
   size       = var.droplet_size
   monitoring = true
   backups    = var.droplet_backups
